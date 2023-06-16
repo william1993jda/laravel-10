@@ -24,5 +24,6 @@
         @endforeach
     </tbody>
 </table>
+<a href="{{ route('supports.create') }}">Criar nova dúvida</a>
 
 <x-pagination :paginator="$supports" :appends="$filters"/>
