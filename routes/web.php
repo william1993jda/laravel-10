@@ -26,9 +26,9 @@ Route::get('/supports/{id}', [SupportController::class, 'show'])->name('supports
 
 Route::post('/supports', [SupportController::class, 'store'])->name('supports.store');
 
-Route::get('/supports', [SupportController::class, 'index'])
+Route::get('/', [SupportController::class, 'index'])
     ->name('supports.index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('supports');
+//});
