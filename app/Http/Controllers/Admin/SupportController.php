@@ -6,7 +6,7 @@ use App\DTO\CreateSupportDTO;
 
 use App\DTO\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateSupport;
+//use App\Http\Requests\StoreUpdateSupport;
 use App\Http\Requests\StoreUpdateSupportRequest;
 use App\Models\Support;
 use App\Services\SupportService;
@@ -21,9 +21,19 @@ class SupportController extends Controller
 //    public function index(Support $support) {
     public function index(Request $request)
     {
-        $supports = $this->service->getAll($request->filter);
+//        $supports = $this->service->getAll($request->filter);
+        $supports = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter,
+        );
 
-        return view('admin/supports/index', compact('supports'));
+        $filters = ['filter' => $request->get('filter', '')];
+
+//        dd($supports->items());
+//        dd($supports);
+
+        return view('admin/supports/index', compact('supports', 'filters'));
     }
 
     public function show(string $id)
