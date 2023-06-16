@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTO\CreateSupportDTO;
-
-use App\DTO\UpdateSupportDTO;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
-//use App\Http\Requests\StoreUpdateSupport;
 use App\Http\Requests\StoreUpdateSupportRequest;
 use App\Models\Support;
 use App\Services\SupportService;
 use Illuminate\Http\Request;
+
+//use App\Http\Requests\StoreUpdateSupport;
 
 
 class SupportController extends Controller

@@ -2,10 +2,8 @@
 
 namespace App\Repositories;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
-use App\Repositories\PaginationInterface;
-use App\Repositories\PaginationPresenter;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Models\Support;
 use stdClass;
 
@@ -56,13 +54,13 @@ class SupportEloquentORM implements SupportRepositoryInterface
         $this->model->findOrFail($id)->delete();
     }
 
-    public function new(CreateSupportDTO|\App\DTO\Supports\CreateSupportDTO $dto): stdClass
+    public function new(CreateSupportDTO $dto): stdClass
     {
         $support = $this->model->create((array) $dto);
         return (object) $support->toArray();
     }
 
-    public function update(UpdateSupportDTO|\App\DTO\Supports\UpdateSupportDTO $dto): stdClass|null
+    public function update(UpdateSupportDTO $dto): stdClass|null
     {
         if (!$support = $this->model->find($dto->id)) {
             return null;
