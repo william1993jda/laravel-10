@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Adapters\ApiAdapter;
 use App\DTO\Supports\CreateSupportDTO;
 use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
@@ -10,19 +11,26 @@ use App\Http\Resources\SupportResource;
 use App\Models\Support;
 use App\Services\SupportService;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class SupportController extends Controller
 {
     public function __construct(protected SupportService $service)
-    {
-    }
+    {}
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $supports = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 1),
+            filter: $request->filter
+        );
+//        $supports = Support::paginate();
+
+        return ApiAdapter::toJson($supports);
     }
 
     /**
@@ -45,7 +53,7 @@ class SupportController extends Controller
         if (!$support = $this->service->findOne($id)){
             return response()->json([
                 'error' => 'Not Found',
-            ], 404);
+            ], ResponseAlias::HTTP_NOT_FOUND);
         }
 
         return new SupportResource($support);
@@ -61,7 +69,7 @@ class SupportController extends Controller
         if (!$support) {
             return response()->json([
                 'error' => 'Not Found',
-            ], 404);
+            ], ResponseAlias::HTTP_NOT_FOUND);
         }
 
         return new SupportResource($support);
@@ -82,6 +90,6 @@ class SupportController extends Controller
 
         return response()->json([
             'error' => 'Not Content',
-        ], 204);
+        ], ResponseAlias::HTTP_NO_CONTENT);
     }
 }
