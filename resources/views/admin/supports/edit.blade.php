@@ -1,3 +1,7 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Editar dúvida')
+
 <h1>
     Dúvida:
     <strong>

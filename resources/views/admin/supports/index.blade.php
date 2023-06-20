@@ -1,5 +1,12 @@
-<h1>Linstagem dos usuários</h1>
+@extends('admin.layouts.app')
 
+@section('title', 'Suportes')
+
+@section('header')
+    @include('admin.layouts.partils.header')
+@endsection
+
+@section('content')
 <table>
     <thead>
         <th>Assunto</th>
@@ -27,3 +34,4 @@
 <a href="{{ route('supports.create') }}">Criar nova dúvida</a>
 
 <x-pagination :paginator="$supports" :appends="$filters"/>
+@endsection
