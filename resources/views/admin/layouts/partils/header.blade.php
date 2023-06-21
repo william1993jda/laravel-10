@@ -3,7 +3,7 @@
         <h1 class="text-lg text-black-500">Fórum</h1>
         <div class="flex items-center">
             <span class="flex items-center justify-center px-3 py-1 text-blue-600 bg-black rounded-2xl text-xs">
-                {{ $supports->total() }} {{ $supports->total() > 1 ? 'dúvidas': 'dúvida' }}
+                {{ $supports->total() }} {{ $supports->total() > 1 ? 'dúvidas': 'dúvida' }} {{ $filters['filter'] ? 'com o tema pesquisado.': '' }}
             </span>
         </div>
     </div>
